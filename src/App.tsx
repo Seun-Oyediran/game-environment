@@ -1,8 +1,12 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components";
-import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
-import { useMemo } from "react";
+import {
+  KeyboardControls,
+  KeyboardControlsEntry,
+  Loader,
+} from "@react-three/drei";
+import { Suspense, useMemo } from "react";
 import { Physics } from "@react-three/rapier";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -38,10 +42,11 @@ function App() {
         >
           {/* <color attach="background" args={["#202020"]} />
         <fog attach="fog" args={["#202020", 5, 20]} /> */}
-
-          <Physics>
-            <Experience />
-          </Physics>
+          <Suspense fallback={null}>
+            <Physics>
+              <Experience />
+            </Physics>
+          </Suspense>
           {/* <OrbitControls /> */}
 
           <mesh receiveShadow position={[0, -1, 0]} rotation-x={-Math.PI / 2}>
@@ -50,6 +55,7 @@ function App() {
           </mesh>
         </Canvas>
       </KeyboardControls>
+      <Loader />
     </>
   );
 }
