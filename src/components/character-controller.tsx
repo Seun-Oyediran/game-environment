@@ -57,11 +57,11 @@ const CharacterController = (props: IProps) => {
     }
 
     if (isHost()) {
-      state.setState("pos", rigidBodyRef.current.translation());
+      state.setState("pos", rigidBodyRef?.current?.translation());
     } else {
       const pos = state.getState("pos");
       if (pos) {
-        rigidBodyRef.current.setTranslation(pos);
+        rigidBodyRef?.current?.setTranslation(pos);
       }
     }
 
@@ -82,6 +82,8 @@ const CharacterController = (props: IProps) => {
       );
     }
   });
+
+  console.log(isHost());
 
   return (
     <group position={position}>
